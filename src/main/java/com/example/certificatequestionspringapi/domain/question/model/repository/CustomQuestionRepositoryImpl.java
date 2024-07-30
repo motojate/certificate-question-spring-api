@@ -5,6 +5,10 @@ import com.example.certificatequestionspringapi.domain.question.presentation.dto
 
 import java.util.List;
 
-public interface CustomQuestionRepository {
-    List<QuestionResponseDto> findQuestionByQuestionType(QuestionType questionType);
+public class CustomQuestionRepositoryImpl implements CustomQuestionRepository {
+
+    @Override
+    public List<QuestionResponseDto> findQuestionByQuestionType(QuestionType questionType) {
+        return List.of();
+    }
 }

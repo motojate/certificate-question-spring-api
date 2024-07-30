@@ -3,7 +3,10 @@ package com.example.certificatequestionspringapi.domain.question.presentation.dt
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
+import java.util.List;
+
 @Getter
 @SuperBuilder
-public class ShortAnswerQuestionResponseDto extends QuestionResponseDto {
+public class MultipleQuestionResponseDto extends QuestionResponseDto {
+    private final List<OptionResponseDto> options;
 }
