@@ -4,17 +4,17 @@ import com.example.certificatequestionspringapi.common.enums.QuestionType;
 import com.example.certificatequestionspringapi.domain.question.model.entity.Answer;
 import com.example.certificatequestionspringapi.domain.question.model.entity.MultipleChoiceQuestion;
 import com.example.certificatequestionspringapi.domain.question.model.entity.Option;
+import com.example.certificatequestionspringapi.domain.question.model.entity.ShortAnswerQuestion;
 import com.example.certificatequestionspringapi.domain.question.model.repository.AnswerRepository;
 import com.example.certificatequestionspringapi.domain.question.model.repository.QuestionRepository;
 import com.example.certificatequestionspringapi.domain.question.presentation.dto.request.MultipleChoiceQuestionCreateDto;
+import com.example.certificatequestionspringapi.domain.question.presentation.dto.request.ShortAnswerQuestionCreateDto;
 import com.example.certificatequestionspringapi.domain.question.presentation.dto.response.QuestionResponseDto;
-import com.example.certificatequestionspringapi.domain.question.presentation.dto.response.ShortAnswerQuestionResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,8 +27,7 @@ public class QuestionService {
     }
 
     @Transactional
-    public Long create(MultipleChoiceQuestionCreateDto multipleChoiceQuestionCreateDto) {
-
+    public Long createMultipleChoiceQuestion(MultipleChoiceQuestionCreateDto multipleChoiceQuestionCreateDto) {
         MultipleChoiceQuestion multipleChoiceQuestion = MultipleChoiceQuestion.builder()
                 .questionText(multipleChoiceQuestionCreateDto.getQuestionText())
                 .questionChapter(multipleChoiceQuestionCreateDto.getQuestionChapter())
@@ -50,5 +49,22 @@ public class QuestionService {
         questionRepository.save(multipleChoiceQuestion);
         answerRepository.save(answer);
         return multipleChoiceQuestion.getId();
+    }
+
+    @Transactional
+    public Long createShortAnswerQuestion(ShortAnswerQuestionCreateDto shortAnswerQuestionCreateDto) {
+        ShortAnswerQuestion shortAnswerQuestion = ShortAnswerQuestion.builder()
+                .questionText(shortAnswerQuestionCreateDto.getQuestionText())
+                .questionChapter(shortAnswerQuestionCreateDto.getQuestionChapter())
+                .build();
+
+        List<Answer> answers = shortAnswerQuestionCreateDto.getAnswers().stream()
+                .map(answerText -> Answer.builder()
+                        .answerText(answerText)
+                        .question(shortAnswerQuestion)
+                        .build())
+                .toList();
+        answerRepository.saveAll(answers);
+        return shortAnswerQuestion.getId();
     }
 }

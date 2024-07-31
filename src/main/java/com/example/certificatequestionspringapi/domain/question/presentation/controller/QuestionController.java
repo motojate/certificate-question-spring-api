@@ -3,6 +3,7 @@ package com.example.certificatequestionspringapi.domain.question.presentation.co
 import com.example.certificatequestionspringapi.common.enums.QuestionType;
 import com.example.certificatequestionspringapi.domain.question.application.QuestionService;
 import com.example.certificatequestionspringapi.domain.question.presentation.dto.request.MultipleChoiceQuestionCreateDto;
+import com.example.certificatequestionspringapi.domain.question.presentation.dto.request.ShortAnswerQuestionCreateDto;
 import com.example.certificatequestionspringapi.domain.question.presentation.dto.response.QuestionResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +23,18 @@ public class QuestionController {
         return ResponseEntity.ok(questionService.findAll(questionType));
     }
 
-    @PostMapping
-    public ResponseEntity<Long> generateQuestion(@RequestBody MultipleChoiceQuestionCreateDto multipleChoiceQuestionCreateDto) {
-        Long questionId = questionService.create(multipleChoiceQuestionCreateDto);
+    @PostMapping("/multiple-question")
+    public ResponseEntity<Long> generateMultipleQuestion(@RequestBody MultipleChoiceQuestionCreateDto multipleChoiceQuestionCreateDto) {
+        Long questionId = questionService.createMultipleChoiceQuestion(multipleChoiceQuestionCreateDto);
+
+        URI location = URI.create("/api/questions/%d" + questionId);
+
+        return ResponseEntity.created(location).body(questionId);
+    }
+
+    @PostMapping("/short-answer")
+    public ResponseEntity<Long> generateShortAnswerQuestion(@RequestBody ShortAnswerQuestionCreateDto shortAnswerQuestionCreateDto) {
+        Long questionId = questionService.createShortAnswerQuestion(shortAnswerQuestionCreateDto);
 
         URI location = URI.create("/api/questions/%d" + questionId);
 
