@@ -23,7 +23,8 @@ public class Answer extends BaseTime {
     private Question question;
 
     @Builder
-    public Answer(String answerText) {
+    public Answer(String answerText, Question question) {
         this.answerText = answerText;
+        this.question = question;
     }
 }

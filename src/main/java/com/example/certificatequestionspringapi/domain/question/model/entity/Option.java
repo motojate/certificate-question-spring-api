@@ -29,8 +29,9 @@ public class Option extends BaseTime {
     private MultipleChoiceQuestion question;
 
     @Builder
-    public Option(String optionText, QuestionLabel label) {
+    public Option(String optionText, QuestionLabel label, MultipleChoiceQuestion question) {
         this.optionText = optionText;
         this.label = label;
+        this.question = question;
     }
 }
