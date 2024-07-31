@@ -23,7 +23,7 @@ public class QuestionController {
         return ResponseEntity.ok(questionService.findAll(questionType));
     }
 
-    @PostMapping("/multiple-question")
+    @PostMapping("/multiple-choice")
     public ResponseEntity<Long> generateMultipleQuestion(@RequestBody MultipleChoiceQuestionCreateDto multipleChoiceQuestionCreateDto) {
         Long questionId = questionService.createMultipleChoiceQuestion(multipleChoiceQuestionCreateDto);
 
