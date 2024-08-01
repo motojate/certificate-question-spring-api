@@ -1,4 +1,4 @@
-package com.example.certificatequestionspringapi.domain.user.entity;
+package com.example.certificatequestionspringapi.domain.user.model.entity;
 
 import com.example.certificatequestionspringapi.common.entities.BaseTime;
 import com.example.certificatequestionspringapi.common.enums.QuestionType;
