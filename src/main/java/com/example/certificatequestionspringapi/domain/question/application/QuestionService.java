@@ -64,6 +64,7 @@ public class QuestionService {
                         .question(shortAnswerQuestion)
                         .build())
                 .toList();
+        questionRepository.save(shortAnswerQuestion);
         answerRepository.saveAll(answers);
         return shortAnswerQuestion.getId();
     }
