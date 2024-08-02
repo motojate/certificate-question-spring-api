@@ -68,4 +68,8 @@ public class QuestionService {
         answerRepository.saveAll(answers);
         return shortAnswerQuestion.getId();
     }
+
+    private List<String> getQuestionAnswers(Long questionId) {
+        return answerRepository.findAnswerByQuestionId(questionId);
+    }
 }
