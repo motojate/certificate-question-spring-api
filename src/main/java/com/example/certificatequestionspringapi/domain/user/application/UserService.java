@@ -29,4 +29,8 @@ public class UserService {
         return userRepository.updateUserExp(userSeq);
     }
 
+    public void solveQuestion(String userSeq, Long questionId, String answer) {
+
+    }
+
 }
