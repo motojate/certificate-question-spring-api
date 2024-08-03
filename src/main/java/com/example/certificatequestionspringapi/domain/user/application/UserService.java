@@ -24,4 +24,9 @@ public class UserService {
         return user.getUserSeq();
     }
 
+    @Transactional
+    public User updateUserExp(String userSeq) {
+        return userRepository.updateUserExp(userSeq);
+    }
+
 }
